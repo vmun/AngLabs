@@ -1,0 +1,56 @@
+<div class="container" id="authformlogin">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header">
+        <div class="row" style="max-width: 100%; margin:0;">
+          <div id="auth" class="col mode active" (click)="setActive('auth', 'reg')">
+            <h3>Вход</h3>
+          </div>
+          <div id="reg" class="col mode inactive" (click)="setActive('reg', 'auth')">
+            <h3>Регистрация</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+        <div style=" color: white">Value: {{ name.value }}</div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input type="text" class="form-control" [formControl]="name" placeholder="Логин">
+        </div>
+
+        <div style=" color: white">Value: {{ password.value }}</div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <input type="text" class="form-control" [formControl]="password" placeholder="Пароль">
+        </div>
+
+        <div style=" color: white">Value: {{ (date.value | json) }}</div>
+
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [formControl]="date" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+              class="fas fa-calendar"></i></button>
+          </div>
+        </div>
+        <br>
+        <div>
+          DD:{{day}}
+        </div>
+        <br>
+        <div class="form-group">
+          <button id="submit" class="btn float-right login_btn" (click)="this.time()">Submit</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
