@@ -19,7 +19,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
           </div>
-          <input type="text" class="form-control" [formControl]="name" placeholder="Логин">
+          <input type="text" class="form-control" [formControl]="myForm" placeholder="Логин">
         </div>
 
         <div style=" color: white">Value: {{ password.value }}</div>
@@ -36,7 +36,8 @@
           <input class="form-control" placeholder="yyyy-mm-dd"
                  name="dp" [formControl]="date" ngbDatepicker #d="ngbDatepicker">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"
+            ><i
               class="fas fa-calendar"></i></button>
           </div>
         </div>
@@ -46,7 +47,9 @@
         </div>
         <br>
         <div class="form-group">
-          <button id="submit" class="btn float-right login_btn" (click)="this.time()">Submit</button>
+          <button id="submit" class="btn float-right login_btn" (click)="this.time()"
+                  [disabled]="fg.invalid ">Submit
+          </button>
         </div>
       </div>
 
@@ -54,3 +57,6 @@
     </div>
   </div>
 </div>
+
+<div>{{myForm|json}}</div>
+<div>{{this.formattedMessage}}</div>

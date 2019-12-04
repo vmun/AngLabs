@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {forEach} from '@angular/router/src/utils/collection';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,19 +10,64 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class LoginFormComponent implements OnInit {
 
-  name = new FormControl('');
-  password = new FormControl('');
-  date = new FormControl('');
+  name = new FormControl('', Validators.required);
+  password = new FormControl('', Validators.required);
+  date = new FormControl('', Validators.required);
+  fg = new FormGroup({
+    name: this.name, password: this.password, date: this.date
+  });
   date2;
   day;
   year;
   month;
+  //
+  // constructor(private service: AuthService) {
+  // }
 
-  constructor() {
+  myForm: FormGroup;
+  formattedMessage: string;
+
+  constructor(private formBuilder: FormBuilder) {
+  }
+
+  onChanges(): void {
+    this.myForm.valueChanges.subscribe(val => {
+      this.formattedMessage =
+        `Hello,
+
+    My name is ${val.name} and my email is ${val.email}.
+
+    I would like to tell you that ${val.password}.`;
+    });
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.myForm.value);
   }
 
   ngOnInit() {
+    this.myForm = this.formBuilder.group({
+      name: '',
+      email: '',
+      password: ''
+    });
+
+    this.onChanges();
+    {
+    }
   }
+
+  // ngOnInit() {
+  //   this.service.subjectObs.subscribe(d => {
+  //     console.log(d);
+  //   })
+  //
+  //   this.service.behSubjectObs.subscribe(d => {
+  //     console.log(d)
+  //   })
+  //   this.service.setForm('lol');
+  // }
 
   time() {
     // @ts-ignore
